@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include<vector>
+#include<string>
 using namespace std;
 
 struct Node {
@@ -25,6 +26,13 @@ public:
         if (Arr[index] == nullptr) {
             Arr[index] = new Node(c);
         }
+        else{
+            Node* current = Arr[index];
+            while(current->next != nullptr){
+                current =current->next;
+            }
+            current->next = new Node(c); 
+        }
     }
 
 };
@@ -32,5 +40,8 @@ public:
 int main(){
     string text;
     getline(cin, text);
+    for(int i=0 ; i<text.length() ;i++){
+
+    }
 
 }
