@@ -1,6 +1,7 @@
 // In the name of Allah
 
 #include<iostream>
+#include<vector>
 using namespace std;
 
 struct Node {
@@ -10,11 +11,9 @@ struct Node {
 
 class HashTable{
 private:
-    int size;
-    Node* Arr;
+    vector<Node> Arr[120];
 
 public:
-    HashTable(int s): size(s), Arr(new Node[s]) {}
 
 };
 
