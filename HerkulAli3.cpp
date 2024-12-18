@@ -5,9 +5,11 @@
 #include <string>
 using namespace std;
 
-// تابعی برای محاسبه مقدار هش
-long long calculateHash(const string& str, int prime, int mod) {
+long long hashFunction(const string& str) {
     long long hash = 0;
+    int prime = 31;
+    int mod = 1638433;
+    
     for (char c : str) {
         hash = (hash * prime + c) % mod;
     }
@@ -15,11 +17,14 @@ long long calculateHash(const string& str, int prime, int mod) {
 }
 
 // تابع اصلی برای جستجو
-vector<int> rabinKarp(const string& text, const string& pattern, int prime = 31, int mod = 1e9 + 7) {
+vector<int> rabinKarp(const string& text, const string& pattern) {
     int textLen = text.length();
     int patternLen = pattern.length();
-    long long patternHash = calculateHash(pattern, prime, mod);
-    long long currentHash = calculateHash(text.substr(0, patternLen), prime, mod);
+    int prime = 31;
+    int mod = 1638433;
+
+    long long patternHash = hashFunction(pattern);
+    long long currentHash = hashFunction(text.substr(0, patternLen));
     vector<int> result;
 
     // مقدار پایه برای به‌روز رسانی هش
