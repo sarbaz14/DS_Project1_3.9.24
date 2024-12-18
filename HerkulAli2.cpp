@@ -2,7 +2,6 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
 using namespace std;
 
 vector<int> computeLPS(const string pattern) {
@@ -27,19 +26,10 @@ vector<int> computeLPS(const string pattern) {
     return lps;
 }
 
-// void print(vector<int> lps){
-//     cout << "!#!\n";
-//     for(int i : lps){
-//         cout << i << " ";
-//     }
-//     cout << "\n";
-// }
-
 vector<int> KMPSearch(const string text, const string pattern) {
     vector<int> result;
     int n = text.size(), m = pattern.size(), i = 0, j = 0;
     vector<int> lps = computeLPS(pattern);
-    // print(lps);
 
     while (i < n) {
         if (pattern[j] == text[i]){
@@ -89,6 +79,6 @@ int main() {
             cout << endl;
         }
     }
-    
+
     return 0;
 }
