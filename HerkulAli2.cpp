@@ -9,6 +9,7 @@ vector<int> computeLPS(const string pattern) {
     int m = pattern.size();
     vector<int> lps(m, 0);
     int len = 0, i = 1;
+
     while (i < m) {
         if (pattern[i] == pattern[len]) {
             len++;
@@ -26,27 +27,37 @@ vector<int> computeLPS(const string pattern) {
     return lps;
 }
 
-void print(vector<int> lps){
-    cout << "!#!\n";
-    for(int i : lps){
-        cout << i << " ";
-    }
-    cout << "\n";
-}
+// void print(vector<int> lps){
+//     cout << "!#!\n";
+//     for(int i : lps){
+//         cout << i << " ";
+//     }
+//     cout << "\n";
+// }
 
-vector<int> KMPSearch(const string& text, const string& pattern) {
+vector<int> KMPSearch(const string text, const string pattern) {
     vector<int> result;
     int n = text.size(), m = pattern.size(), i = 0, j = 0;
     vector<int> lps = computeLPS(pattern);
-    print(lps);
+    // print(lps);
+
     while (i < n) {
-        if (pattern[j] == text[i]) i++, j++;
+        if (pattern[j] == text[i]){
+            i++;
+            j++;
+        } 
+
         if (j == m) {
             result.push_back(i - j);
             j = lps[j - 1];
-        } else if (i < n && pattern[j] != text[i]) {
-            if (j != 0) j = lps[j - 1];
-            else i++;
+        }
+        else if (i < n && pattern[j] != text[i]) {
+            if (j != 0){
+                j = lps[j - 1];
+            } 
+            else {
+                i++;
+            }
         }
     }
     return result;
