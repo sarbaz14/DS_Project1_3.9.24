@@ -67,18 +67,28 @@ int main() {
     string text;
     int n;
     vector<string> patterns;
+
     getline(cin, text);
     cin >> n;
     cin.ignore();
     patterns.resize(n);
-    for (int i = 0; i < n; i++) getline(cin, patterns[i]);
-    for (const string& pattern : patterns) {
+
+    for (int i = 0; i < n; i++){
+        getline(cin, patterns[i]);
+    }
+    for (const string pattern : patterns) {
         vector<int> positions = KMPSearch(text, pattern);
-        if (positions.empty()) cout << "-1" << endl;
+        
+        if (positions.empty()){
+            cout << "-1" << endl;
+        } 
         else {
-            for (int pos : positions) cout << pos << " ";
+            for (int pos : positions){
+                cout << pos << " ";
+            } 
             cout << endl;
         }
     }
+    
     return 0;
 }
