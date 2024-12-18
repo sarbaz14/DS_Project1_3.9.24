@@ -34,13 +34,14 @@ private:
         }
     }
 
-    // int searchIndex(vector<int>* indexsInput, int size){
-    //     for (int i = 0; i < size; i++){
-    //         for (int j = 0; j < indexsInput[i].size(); j++){
-    //             int index = indexsInput[i][j].index;
-    //         }
-    //     }
-    // }
+    int searchIndex(vector<int>* indexsInput, int size){
+        for (int i = 0; i < size; i++){
+            for (int j = 0; j < indexsInput[i].size(); j++){
+                int index = indexsInput[i][j];
+                
+            }
+        }
+    }
 
 public:
     void Input(string text){
