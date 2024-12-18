@@ -31,12 +31,12 @@ public:
 };
 
 Hash::Hash(int patternLen) {
-    for (int i = 1; i < patternLen; ++i) {
+    for (int i = 1; i < patternLen; i++) {
         basePower = (basePower * prime) % mod;
     }
 }
 
-vector<int> rabinKarp(const string& text, const string& pattern) {
+vector<int> rabinKarp(const string text, const string pattern) {
     int textLen = text.length();
     int patternLen = pattern.length();
     Hash hash(patternLen);
@@ -62,25 +62,22 @@ vector<int> rabinKarp(const string& text, const string& pattern) {
 int main() {
     string text;
     int n;
-    cout << "Enter the main text: ";
+    
     getline(cin, text);
-
-    cout << "Enter the number of patterns: ";
     cin >> n;
 
     vector<string> patterns(n);
     cin.ignore(); // پاک کردن کاراکتر اضافی '\n'
-    for (int i = 0; i < n; ++i) {
-        cout << "Enter pattern " << i + 1 << ": ";
+    for (int i = 0; i < n; i++) {
         getline(cin, patterns[i]);
     }
 
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         vector<int> matches = rabinKarp(text, patterns[i]);
-        cout << "Pattern \"" << patterns[i] << "\" found at indices: ";
         if (matches.empty()) {
-            cout << "None";
-        } else {
+            cout << -1;
+        } 
+        else {
             for (int index : matches) {
                 cout << index << " ";
             }
