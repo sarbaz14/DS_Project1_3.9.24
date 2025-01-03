@@ -23,7 +23,7 @@ public:
     }
 };
 
-vector<int> buildSuffixArray(const string &s) {
+vector<int> buildSuffixArray(const string s) {
     int n = s.size();
     vector<int> saffix(n), rank(n), tempRank(n);
     for (int i = 0; i < n; ++i){
@@ -37,17 +37,18 @@ vector<int> buildSuffixArray(const string &s) {
         });
         
         tempRank[saffix[0]] = 0;
-        for (int i = 1; i < n; ++i) {
+        for (int i = 1; i < n; i++) {
             tempRank[saffix[i]] = tempRank[saffix[i - 1]] + (compare.cmp(saffix[i - 1], saffix[i]) ? 1 : 0);
         }
         swap(rank, tempRank);
     }
     return saffix;
 }
-vector<int> buildLCP(const string &s, const vector<int> &suffix) {
+
+vector<int> buildLCP(const string s, const vector<int> suffix) {
     int n = s.size();
     vector<int> lcp(n), rank(n);
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         rank[suffix[i]] = i;
     }
     int k = 0;
@@ -65,7 +66,8 @@ vector<int> buildLCP(const string &s, const vector<int> &suffix) {
     }
     return lcp;
 }
-vector<int> findPatternOccurrences(const string &text, const string &pattern, const vector<int> &suffix, const vector<int> &lcp) {
+
+vector<int> findPatternOccurrences(const string text, const string pattern, const vector<int> suffix, const vector<int> lcp) {
     int n = text.size();
     int m = pattern.size();
     vector<int> result;
@@ -107,14 +109,11 @@ int main() {
         string pattern;
         cin >> pattern;
         vector<int> occurrences = findPatternOccurrences(text, pattern, suffix, lcp);  
-        if (occurrences.empty()) {
-        // dakhel in soal toye halati ke ebarat mored nazar daron matn ma nabashe nabayd hichi chap beshe
-        } 
-        else {
+        if (!occurrences.empty()) {
             for (int pos : occurrences) {
                 cout << pos << " ";
             }
-        }
+        } 
         cout << endl;
     }
     return 0;
