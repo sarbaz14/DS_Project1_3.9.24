@@ -26,9 +26,9 @@ public:
 vector<int> buildSuffixArray(const string s) {
     int n = s.size();
     vector<int> saffix(n), rank(n), tempRank(n);
-    for (int i = 0; i < n; ++i){
-        saffix[i]=i;
-        rank[i]=s[i];
+    for (int i = 0; i < n; i++){
+        saffix[i] = i;
+        rank[i] = s[i];
     }
     for (int k = 1; k < n; k *= 2) {
         Compare compare(rank, k, n);
@@ -52,7 +52,7 @@ vector<int> buildLCP(const string s, const vector<int> suffix) {
         rank[suffix[i]] = i;
     }
     int k = 0;
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < n; i++) {
         if (rank[i] == n - 1) {
             k = 0;
             continue;
