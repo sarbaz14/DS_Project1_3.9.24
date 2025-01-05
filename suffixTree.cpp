@@ -2,47 +2,48 @@
 
 #include <iostream>
 #include <vector>
-#include <string>
 #include <algorithm>
 using namespace std;
 
 class Compare
 {
 private:
-    vector<int> rank;
-    int k;
-    int n;
+    vector<int>* rank;
+    int* k;
+    int* n;
 public:
-    Compare(vector<int> rank, int k, int n) : rank(rank), k(k), n(n) {};
+    Compare(vector<int>* rank, int* k, int* n) : rank(rank), k(k), n(n) {};
 
     bool cmp(int i, int j){
-        if (rank[i] != rank[j]) return rank[i] < rank[j];
-        int ri = i + k < n ? rank[i + k] : -1;
-        int rj = j + k < n ? rank[j + k] : -1;
+        if ((*rank)[i] != (*rank)[j]) return (*rank)[i] < (*rank)[j];
+        int ri = i + *k < *n ? (*rank)[i + *k] : -1;
+        int rj = j + *k < *n ? (*rank)[j + *k] : -1;
         return ri < rj;
     }
 };
 
 vector<int> buildSuffixArray(const string s) {
     int n = s.size();
-    vector<int> saffix(n), rank(n), tempRank(n);
+    vector<int> suffixArr(n), rank(n), tempRank(n);
     for (int i = 0; i < n; i++){
-        saffix[i] = i;
+        suffixArr[i] = i;
         rank[i] = s[i];
     }
-    for (int k = 1; k < n; k *= 2) {
-        Compare compare(rank, k, n);
-        sort(saffix.begin(), saffix.end(), [&](int i, int j) {
+
+    int k = 1;
+    Compare compare(&rank, &k, &n);
+    for (; k < n; k *= 2) {
+        sort(suffixArr.begin(), suffixArr.end(), [&](int i, int j) {
             return compare.cmp(i, j);
         });
         
-        tempRank[saffix[0]] = 0;
+        tempRank[suffixArr[0]] = 0;
         for (int i = 1; i < n; i++) {
-            tempRank[saffix[i]] = tempRank[saffix[i - 1]] + (compare.cmp(saffix[i - 1], saffix[i]) ? 1 : 0);
+            tempRank[suffixArr[i]] = tempRank[suffixArr[i - 1]] + (compare.cmp(suffixArr[i - 1], suffixArr[i]) ? 1 : 0);
         }
         swap(rank, tempRank);
     }
-    return saffix;
+    return suffixArr;
 }
 
 vector<int> buildLCP(const string s, const vector<int> suffix) {
