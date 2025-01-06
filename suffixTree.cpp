@@ -22,7 +22,7 @@ public:
     }
 };
 
-vector<int> buildSuffixArray(const string s) {
+vector<int> buildSuffixArray(const string &s) {
     int n = s.size();
     vector<int> suffixArr(n), rank(n), tempRank(n);
     for (int i = 0; i < n; i++){
@@ -46,7 +46,7 @@ vector<int> buildSuffixArray(const string s) {
     return suffixArr;
 }
 
-vector<int> buildLCP(const string s, const vector<int> suffix) {
+vector<int> buildLCP(const string &s, const vector<int> &suffix) {
     int n = s.size();
     vector<int> lcp(n), rank(n);
     for (int i = 0; i < n; i++) {
@@ -68,7 +68,7 @@ vector<int> buildLCP(const string s, const vector<int> suffix) {
     return lcp;
 }
 
-vector<int> findPatternOccurrences(const string text, const string pattern, const vector<int> suffix, const vector<int> lcp) {
+vector<int> findPatternOccurrences(const string &text, const string &pattern, const vector<int> &suffix, const vector<int> lcp) {
     int n = text.size();
     int m = pattern.size();
     vector<int> result;
